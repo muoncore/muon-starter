@@ -1,4 +1,5 @@
 rabbitmq:
+  container_name: rabbitmq
   image: rabbitmq:3.5.4-management
   ports:
     - "15672:15672"
@@ -6,15 +7,14 @@ rabbitmq:
   environment:
     - RABBITMQ_DEFAULT_USER=muon
     - RABBITMQ_DEFAULT_PASS=microservices
-photon:
-  image: quay.io/simplicityitself/photoneventstore
-  ports:
-    - "3000:3000"
+#molecule:
+#  image: quay.io/simplicityitself/photoneventstore
+#  ports:
+#    - "3000:3000"
+#  links:
+#    - rabbitmq
+infra-link:
+  image: something
   links:
     - rabbitmq
-muoncli:
-  image: quay.io/simplicityitself/muonsshcli
-  links:
-    - rabbitmq
-  ports:
-    - "2222:22"
+  privileged: true
