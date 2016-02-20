@@ -1,0 +1,4 @@
+molecule:
+  image: quay.io/simplicityitself/molecule
+  external_links:
+    - rabbitmq
