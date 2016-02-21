@@ -7,14 +7,8 @@ rabbitmq:
   environment:
     - RABBITMQ_DEFAULT_USER=muon
     - RABBITMQ_DEFAULT_PASS=microservices
-#molecule:
-#  image: quay.io/simplicityitself/photoneventstore
-#  ports:
-#    - "3000:3000"
-#  links:
-#    - rabbitmq
 infra-link:
-  image: something
+  image: quay.io/simplicityitself/infra-docker-compose
   links:
     - rabbitmq
   privileged: true
