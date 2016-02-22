@@ -1,4 +1,5 @@
 rabbitmq:
+  restart: always
   container_name: rabbitmq
   image: rabbitmq:3.5.4-management
   ports:
@@ -8,7 +9,10 @@ rabbitmq:
     - RABBITMQ_DEFAULT_USER=muon
     - RABBITMQ_DEFAULT_PASS=microservices
 infra-link:
+  restart: always
   image: quay.io/simplicityitself/infra-docker-compose
   links:
     - rabbitmq
   privileged: true
+  volumes:
+    - ../:/applocal/environments 
