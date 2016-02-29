@@ -16,3 +16,4 @@ infra-link:
   privileged: true
   volumes:
     - ../:/applocal/environments 
+    - /var/run/docker.sock:/container/path/docker.sock
