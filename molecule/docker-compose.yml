@@ -3,6 +3,6 @@ molecule:
   container_name: molecule
   image: quay.io/simplicityitself/molecule
   ports:
-    - "8080:7274"
+    - "7274:8080"
   external_links:
     - rabbitmq
