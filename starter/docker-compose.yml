@@ -1,0 +1,38 @@
+version: '2'
+services:
+
+  rabbitmq:
+    restart: always
+    container_name: rabbitmq
+    image: rabbitmq:3.6.2-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=muon
+      - RABBITMQ_DEFAULT_PASS=microservices
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    expose:
+      - "5672"
+      - "15672"
+
+  photon:
+    image: simplicityitself-muon-image.jfrog.io/photon
+    environment:
+      - MUON_URL=amqp://muon:microservices@rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    command: -jar target/photon.jar -rest.host 0.0.0.0
+
+  infra-link:
+    restart: always
+    image: quay.io/simplicityitself/infra-docker-compose
+    links:
+      - rabbitmq
+    privileged: true
+    volumes:
+      - ../:/applocal/environments
+      - /var/run/docker.sock:/container/path/docker.sock
