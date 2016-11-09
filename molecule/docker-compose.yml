@@ -1,8 +1,0 @@
-molecule:
-  restart: always
-  container_name: molecule
-  image: quay.io/simplicityitself/molecule
-  ports:
-    - "7274:8080"
-  external_links:
-    - rabbitmq

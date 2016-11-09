@@ -1,6 +1,0 @@
-muoncli:
-  image: quay.io/simplicityitself/muonsshcli
-  external_links:
-    - muonamqp:rabbitmq
-  ports:
-    - "2222:22"

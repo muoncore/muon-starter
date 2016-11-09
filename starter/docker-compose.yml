@@ -27,6 +27,40 @@ services:
       - "3000"
     command: -jar target/photon.jar -rest.host 0.0.0.0
 
+
+  gateway:
+    image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
+    environment:
+      - MUON_URL=amqp://muon:microservices@rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - "9898:9898"
+  molecule-core:
+      image: simplicityitself-muon-image.jfrog.io/molecule-core:latest
+      environment:
+        - MUON_URL=amqp://muon:microservices@rabbitmq
+      links:
+        - rabbitmq
+        - photon
+
+  molecule-ui:
+    image: simplicityitself-muon-image.jfrog.io/molecule-ui:latest
+    environment:
+      - MUON_URL=amqp://muon:microservices@rabbitmq
+      - PORT=3420
+      - MUON=true
+    links:
+      - rabbitmq
+    ports:
+      - "3420:3420"
+    expose:
+      - "3420"
+    depends_on:
+      - gateway
+      - molecule-core
+      - photon    
+
   infra-link:
     restart: always
     image: quay.io/simplicityitself/infra-docker-compose
