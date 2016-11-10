@@ -54,10 +54,6 @@
       - "3420:3420"
     expose:
       - "3420"
-    depends_on:
-      - gateway
-      - molecule-core
-      - photon    
 
   infra-link:
     restart: always
