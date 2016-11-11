@@ -1,4 +1,6 @@
+version: '2'
 
+services:
   rabbitmq:
     restart: always
     container_name: rabbitmq
@@ -12,7 +14,9 @@
     expose:
       - "5672"
       - "15672"
-
+    networks:
+        - default
+        - rabbit
   photon:
     image: simplicityitself-muon-image.jfrog.io/photon
     environment:
@@ -24,7 +28,9 @@
     expose:
       - "3000"
     command: -jar target/photon.jar -rest.host 0.0.0.0
-
+    networks:
+        - default
+        - rabbit
 
   gateway:
     image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
@@ -34,6 +40,10 @@
       - rabbitmq
     ports:
       - "9898:9898"
+    networks:
+        - default
+        - rabbit
+        
   molecule-core:
       image: simplicityitself-muon-image.jfrog.io/molecule-core:latest
       environment:
@@ -41,7 +51,8 @@
       links:
         - rabbitmq
         - photon
-
+      networks:
+        - rabbit
   molecule-ui:
     image: simplicityitself-muon-image.jfrog.io/molecule-ui:latest
     environment:
@@ -54,7 +65,10 @@
       - "3420:3420"
     expose:
       - "3420"
-
+    networks:
+      - default
+      - rabbit
+      
   infra-link:
     restart: always
     image: quay.io/simplicityitself/infra-docker-compose
@@ -64,3 +78,10 @@
     volumes:
       - ../:/applocal/environments
       - /var/run/docker.sock:/container/path/docker.sock
+    networks:
+      - default
+      - rabbit
+  
+networks:
+    rabbit:
+      driver: bridge
