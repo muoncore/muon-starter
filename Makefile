@@ -10,15 +10,17 @@ clean: docker-stop
 build: docker
 
 # Docker control
-docker:
+docker: init
 	docker-compose build --no-cache
 	docker-compose pull
 
-docker-run:
+docker-run: init
 	docker-compose up -d rabbitmq
 	sleep 8
 	docker-compose up -d
 
+init:
+	-docker network create muon
 
 docker-stop:
 	docker-compose stop

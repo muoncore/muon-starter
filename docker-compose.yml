@@ -83,5 +83,5 @@ services:
       - rabbit
   
 networks:
-    rabbit:
-      driver: bridge
+    muon:
+      external: true
