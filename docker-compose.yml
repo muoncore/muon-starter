@@ -16,7 +16,7 @@ services:
       - "15672"
     networks:
         - default
-        - rabbit
+        - muon
   photon:
     image: simplicityitself-muon-image.jfrog.io/photon
     environment:
@@ -30,7 +30,7 @@ services:
     command: -jar target/photon.jar -rest.host 0.0.0.0
     networks:
         - default
-        - rabbit
+        - muon
 
   gateway:
     image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
@@ -42,7 +42,7 @@ services:
       - "9898:9898"
     networks:
         - default
-        - rabbit
+        - muon
         
   molecule-core:
       image: simplicityitself-muon-image.jfrog.io/molecule-core:latest
@@ -52,7 +52,7 @@ services:
         - rabbitmq
         - photon
       networks:
-        - rabbit
+        - muon
   molecule-ui:
     image: simplicityitself-muon-image.jfrog.io/molecule-ui:latest
     environment:
@@ -67,7 +67,7 @@ services:
       - "3420"
     networks:
       - default
-      - rabbit
+      - muon
       
   infra-link:
     restart: always
@@ -80,7 +80,7 @@ services:
       - /var/run/docker.sock:/container/path/docker.sock
     networks:
       - default
-      - rabbit
+      - muon
   
 networks:
     muon:
