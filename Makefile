@@ -25,7 +25,7 @@ init:
 docker-stop:
 	docker-compose stop
 
-redeploy: build docker docker-run
+redeploy: docker docker-run
 
 dockerclean:
 	docker-compose down
