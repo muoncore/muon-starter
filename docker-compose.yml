@@ -33,6 +33,7 @@ services:
         - muon
 
   gateway:
+    restart: always
     image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
     environment:
       - MUON_URL=amqp://muon:microservices@rabbitmq
