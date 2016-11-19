@@ -70,19 +70,6 @@ services:
       - default
       - muon
       
-  infra-link:
-    restart: always
-    image: quay.io/simplicityitself/infra-docker-compose
-    links:
-      - rabbitmq
-    privileged: true
-    volumes:
-      - ../:/applocal/environments
-      - /var/run/docker.sock:/container/path/docker.sock
-    networks:
-      - default
-      - muon
-  
 networks:
     muon:
       external: true
