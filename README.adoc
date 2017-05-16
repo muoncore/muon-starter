@@ -4,11 +4,7 @@ This environment provides some base functionality to ease Muon development.
 
 * RabbitMQ - For event distribution
 * Photon - for event persistence
-* Molecule - Management UI. Will be available on http://localhost:3420
-* Docker Infrastructure Link - Provides the capability to stop/ start docker compose environments.
-
-This environment will already be running on the developer VM. You can then stop and start other environments that enable you to investigate
-Muon, Photon and other projects.
+* MuonJS Gateway - A muon message router and websocket server that allows muon clients to run in browser.
 
 ## Prerequisites
 
@@ -19,7 +15,17 @@ You need to following installed :-
 
 If you would like to use the Muon CLI, you need to have Node/ NPM installed.
 
-You may also use the Vagrant Muon Dev VM that wraps this project. This can be found at https://github.com/muoncore/muon-dev-vm
+First, install the latest NPM from https://www.npmjs.com/
+
+Then install the muon CLI and set the MUON_URL env variable to point at the RabbitMQ server running in one of the containers that form the starter.
+```
+npm install -g muon-cli
+export MUON_URL=amqp://muon:microservices@localhost
+
+muon discover
+```
+
+Type `muon` to get a list of commands. Follow the http://muoncore.io/guide/index.html[guides] to see what to do next
 
 ## Getting Started
 
@@ -31,4 +37,5 @@ make
 
 The appropriate networks will be created, and docker compose used to start the environment up.
 
-Once the application has started, you can visit XX to get more information, use molecule, photon and being to build applications.
+Once the application has started, you can begin interacting with the existing service, adding more services. See the intro
+workshop for an introduction - https://github.com/muoncore/muon-workshop
