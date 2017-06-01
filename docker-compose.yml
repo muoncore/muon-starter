@@ -19,21 +19,16 @@ services:
         - muon
 
   photon:
-    image: simplicityitself-muon-image.jfrog.io/photon:2017.10
+    restart: always
+    image: simplicityitself-muon-image.jfrog.io/photon-lite:0.0.3
     environment:
       - MUON_URL=amqp://muon:microservices@rabbitmq
     links:
       - rabbitmq
-    ports:
-      - "3000:3000"
-      - "3500:3500"
-    expose:
-      - "3000"
-      - "3500"
-    command: -h2.path /data/muon/data.h2 -ui.port 3500 -rest.host 0.0.0.0
     networks:
         - default
         - muon
+    command: -type h2 -muonurl amqp://muon:microservices@rabbitmq -h2path /tmp/photon
 
   gateway:
     restart: always
