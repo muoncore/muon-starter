@@ -21,10 +21,6 @@ services:
   photon:
     restart: always
     image: simplicityitself-muon-image.jfrog.io/photon-lite:0.0.5
-    environment:
-      - MUON_URL=amqp://muon:microservices@rabbitmq
-    links:
-      - rabbitmq
     networks:
         - default
         - muon
