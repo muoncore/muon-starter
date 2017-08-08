@@ -27,6 +27,7 @@ services:
     entrypoint: /usr/bin/java -Duser.language=en -Duser.country=GB -Xmx2048m -jar /applocal/photon-lite-1.0.jar 
     command: -type h2 -muonurl amqp://muon:microservices@rabbitmq -h2path /tmp/photon
 
+## The Muonjs gateway enables browser side Muon comms into the back end. It is experimental and not production ready. It is not necessary to write microservice style systems.
   gateway:
     restart: always
     image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
