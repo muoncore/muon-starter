@@ -20,7 +20,7 @@ services:
 
   photon:
     restart: always
-    image: simplicityitself-muon-image.jfrog.io/photon-lite:0.0.14
+    image: muoncore/photon-lite:0.0.17
     networks:
         - default
         - muon
@@ -30,7 +30,7 @@ services:
 ## The Muonjs gateway enables browser side Muon comms into the back end. It is experimental and not production ready. It is not necessary to write microservice style systems.
   gateway:
     restart: always
-    image: simplicityitself-muon-image.jfrog.io/muonjs-gateway:latest
+    image: muoncore/muonjs-gateway:latest
     environment:
       - MUON_URL=amqp://muon:microservices@rabbitmq
     links:
